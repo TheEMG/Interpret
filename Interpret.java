@@ -32,6 +32,12 @@ class Interpret{
               while(runBit){
                 instruction = memory[PC];
                 PC = PC +1;
+                int opcode = getInstructionType(instruction);
+                int operand1 = (instruction % 100)/10;
+                int operand2 = instruction % 10;
+
+                executeInstruction(opcode, operand1, operand2);
+
 
               }
             
@@ -50,6 +56,23 @@ class Interpret{
             e.printStackTrace();
         }      
       
+    }
+    private static int getInstructionType(int instruction ){
+        int opcode = instruction / 100;
+        return opcode;
+
+
+    }
+    private static void  int executeInstruction (int opcode, int operand1, int operand2){
+        switch (opcode) {
+            case 1:
+            
+                break;
+        
+            default:
+                break;
+        }
+
     }
   
 }

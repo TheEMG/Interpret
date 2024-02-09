@@ -1,3 +1,10 @@
+/* Eric Gutierrez 
+ * COSC 3355.001
+ * Purpose: 
+ * 
+ */
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -34,33 +41,35 @@ class Interpret{
                 String paddedLine = String.format("%03d", Integer.parseInt(line));
                 memory[i++] = Integer.parseInt(paddedLine);
                }
-               // After loading the instructions into memory
+            //    After loading the instructions into memory
             // System.out.println("Initial memory content:");
             // for (int j = 0; j < i; j++) { // Assuming 'i' is the number of loaded instructions
             //     System.out.println("Memory[" + j + "]: " + memory[j]);
             // }
             
+         
+            
+           
+            }
             System.out.println("Initial PC: " + PC);
             System.out.println("Initial runBit: " + runBit);
-            
-              PC =0;
-              while(runBit && PC < memory.length){
-                System.out.println( "memory "+memory[PC]);
-                instruction = memory[PC];
-               // System.out.println("Current instruction:" +instruction);
-                PC = PC +1;
-                int opcode = getInstructionType(instruction);
-                int operand1 = (instruction % 100)/10;
-                int operand2 = instruction % 10;
-                System.out.println(opcode + " " + operand1 + " " + operand2);
+            PC =0;
+            while(runBit && PC < memory.length){
+              System.out.println( "memory "+memory[PC]);
+              instruction = memory[PC];
+             // System.out.println("Current instruction:" +instruction);
+              PC = PC +1;
+              int opcode = getInstructionType(instruction);
+              int operand1 = (instruction % 100)/10;
+              int operand2 = instruction % 10;
+              System.out.println(opcode + " " + operand1 + " " + operand2);
 
-         
-                executeInstruction(opcode, operand1, operand2);
-            
+       
+              executeInstruction(opcode, operand1, operand2);
+          
 
-               
-                instructionCounter++;
-              }
+             
+              instructionCounter++;
             }
             output();
             System.out.println("Final PC: " + PC + ", runBit: " + runBit);
@@ -99,13 +108,13 @@ class Interpret{
             case 3:
                 System.out.println("Executing opcode " + opcode + " with operands " + operand1 + ", " + operand2);
 
-                registers[operand1] = (registers[operand1] * operand2) % 1000;
+                registers[operand1] = (registers[operand1] * operand2) % 1000 ;
                 break;
             // Add the value of "operand2" to the value in register "operand1" 
             case 4:
                 System.out.println("Executing opcode " + opcode + " with operands " + operand1 + ", " + operand2);
 
-                registers[operand1] = (registers[operand1] + operand2) % 1000;
+                registers[operand1] = (registers[operand1] + operand2) % 1000 ;
                 break;
             // Set register "operand1" to the value in register "operand2"
             case 5:
@@ -117,13 +126,13 @@ class Interpret{
             case 6:
                  System.out.println("Executing opcode " + opcode + " with operands " + operand1 + ", " + operand2);
 
-                 registers[operand1] = (registers[operand1] * operand2) % 1000;
+                 registers[operand1] = (registers[operand1] * registers[operand2]) % 1000;
                  break;
             // Add the value in register "operand2" to register "operand1"
             case 7:
                 System.out.println("Executing opcode " + opcode + " with operands " + operand1 + ", " + operand2);
 
-                registers[operand1] = (registers[operand1] + registers[operand2]) % 1000;
+                registers[operand1] = (registers[operand1] + registers[operand2])  % 1000;
                 break;
             // Set register "operand1" to the value in RAM whose address is in register "operand2"
             case 8:
@@ -141,10 +150,8 @@ class Interpret{
             case 0:
                 System.out.println("Executing opcode " + opcode + " with operands " + operand1 + ", " + operand2);
             
-
-
-                if(registers[operand1] != 0){
-                    PC = registers[operand2];
+                if(registers[operand2] != 0){
+                    PC = registers[operand1];
                   
                   
                 }
